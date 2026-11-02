@@ -221,8 +221,8 @@ export const weddingConfig = {
   storySignOff: "From 6 November 2024 to forever, with God's blessings.",
   gallery: [
     {
-      src: "/images/couple.webp",
-      alt: "Illustrated wedding couple beneath a Rajasthani palace arch",
+      src: "/images/vipul-priya.webp",
+      alt: "Vipul and Priya smiling together in white outfits on an evening out",
       caption: "In every lifetime, you",
       shape: "tall",
     },
