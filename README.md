@@ -1,6 +1,6 @@
-# A palace, a promise, a beautiful beginning
+# Vipul & Priya — Wedding invitation
 
-A complete Indian wedding invitation built with Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, Motion, and Lucide. An embossed gatefold invitation opens into an illustrated palace, live calligraphy, and a continuous garden journey with petals, butterflies, birds, and drifting leaves.
+A complete Indian wedding invitation built with Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, Motion, and Lucide. An embossed gatefold invitation opens into an illustrated palace, readable serif names, spiritual motifs, miniature-art scenes and a gentle journey with petals and drifting leaves.
 
 ## Run locally
 
@@ -20,17 +20,18 @@ The production command uses Next.js's supported Webpack compiler. Development us
 
 ## Make it your invitation
 
-Edit **`config/wedding.ts`**. Names, full names, parents, dates, timezone, milestones, events, venues, directions, portraits, gallery, text, music, social metadata, and social links live here. Aarya, Deepal, their families, and the event details are demonstration content; replace them before sending the invitation to guests.
+Edit **`config/wedding.ts`**. Names, full names, parents, dates, timezone, milestones, events, venues, directions, portraits, gallery, text, music, social metadata, and social links live here. The invitation is configured for Vipul Sharma and Priya Sharma, with celebrations on 25–26 November 2026. The family names, story, four events, contacts and map link follow the supplied final details.
 
-- Dates are ISO 8601 strings with a UTC offset, e.g. `2026-12-12T17:00:00+05:30`. Change `timeZone` too if appropriate. The countdown uses the absolute instant; displayed dates use the configured timezone.
-- Put your own photographs in `public/images/` and update the image paths and descriptive alt text. The included couple, gallery, and venue images are original illustrations, not photographs of real people or the named hotel.
+- Dates are ISO 8601 strings with a UTC offset, e.g. `2026-11-25T11:00:00+05:30`. Change `timeZone` too if appropriate. The countdown targets midnight at the start of 26 November in India. No ceremony time was supplied, so the calendar saves an all-day wedding using `calendarDate` and the exclusive `calendarEndDate`. Event times are explicitly labeled; no ceremony time is inferred.
+- Put your own photographs in `public/images/` and update the image paths and descriptive alt text. The included couple, family, gallery and venue artwork are illustrations, not photographs of Vipul, Priya, their families or the actual venue. Replace the relevant entries with personal photos when available.
 - Replace `hero.illustration` with a wide palace scene. Keep its central arch clear for live text. Names automatically scale down for longer names.
 - Replace `opening.artwork` with your own portrait paper artwork. Cover copy, monogram initials, date, and city remain live text from the config. `opening.guidedScroll` controls the optional seven-second drift into the couple section after opening.
 - `experience.smoothWheel` enables gentle desktop wheel easing. Mobile touch, keyboard scrolling, browser zoom, and scrollable dialogs keep their native behavior. Any guest interaction cancels the introductory drift.
 - `experience.nature` controls the butterflies, birds, leaves, and breeze individually. `experience.chapterLabels` supplies the short transitions between the invitation, couple, story, and celebrations.
 - Guests can use **Pause motion** to stop decorative animation and automatic scrolling. The control also honors the device’s reduced-motion preference.
 - Each event has its own map URL. Available event icons: `flower`, `sun`, `music`, `heart`, `sparkles`; tones: `sage`, `gold`, `rose`.
-- Music starts only after a guest taps its control, pauses when the page is hidden, and can be retried if loading fails. Replace `music.src` with your licensed audio, or set `music.enabled: false`. The included 24-second ambient chime loop is original synthesized audio.
+- Music starts only after a guest taps its control, pauses when the page is hidden, and can be retried if loading fails. Replace `music.src` with your licensed audio, or set `music.enabled: false`. The active 40-second loop is an original synthesized shehnai-inspired instrumental with a tonic drone and a gentle volume fade-in. Recreate it with `node scripts/generate-music.mjs`.
+- The supplied brief lists Pawa as the main venue and Desuri as the wedding ceremony location. Both are preserved visibly, with the morning Baraat departing Pawa. The supplied short Google Maps link is used unchanged; other events link to a Pawa locality search because no exact residence address was supplied. Confirm the venue heading and map destination before sharing.
 - Add `{ label, url }` entries to `socialLinks` if desired.
 
 ## Sharing and deployment
@@ -43,7 +44,7 @@ NEXT_PUBLIC_SITE_URL=https://your-invitation.example
 
 You can set `sharing.url` in the config instead. See `.env.example`. Use an origin such as `https://your-wedding.com`, without a path, query, or credentials. Build again after changing the URL: metadata, robots, and sitemap are generated at build time. Without a URL, development remains usable, canonical links are omitted, the sitemap is empty, and indexing is disabled. Set `seo.allowIndexing: false` if you prefer to keep the published invitation out of search results; this does not restrict access to its URL.
 
-The invitation provides generated Open Graph and Twitter images, a lotus favicon and Apple icon, theme color, and a timezone-correct `.ics` calendar download. Verify your production URL and sample content before sharing. No deployment has been performed automatically.
+The invitation provides generated Open Graph and Twitter images, a lotus favicon and Apple icon, theme color, and an all-day `.ics` wedding calendar download. Verify your production URL and sample content before sharing. No deployment has been performed automatically.
 
 ## Structure
 
@@ -72,6 +73,6 @@ The Playwright suite covers 360, 375, 390, 412, 430, 768, and 1440 px layouts; s
 
 On macOS, tests use installed Google Chrome when available. Else run `npx playwright install chromium`, or provide `PLAYWRIGHT_CHROMIUM_EXECUTABLE`. Set `TEST_BASE_URL` to verify an already-running server; this skips automatic server startup. Screenshots, measurements, and failure traces are saved under `test-results/` and are ignored by Git. Touch tests use Chromium phone emulation; a physical iPhone/Android check is still useful before sending the final invitation.
 
-The gallery dialog and animation feature bundle load separately. Images use `next/image`, fixed aspect ratios, lazy loading below the fold, and WebP/AVIF optimization. The cover and palace are preloaded at sizes suitable for their mobile crops. Reduced-motion preferences open the invitation immediately on activation and disable ambient animation, parallax, guided scrolling, and reveal delays. Without JavaScript, a readable invitation with names, date, time, venue, directions, and calendar download remains available.
+The gallery dialog and animation feature bundle load separately. Images use `next/image`, fixed aspect ratios, lazy loading below the fold, and WebP/AVIF optimization. The cover and palace are preloaded at sizes suitable for their mobile crops. Reduced-motion preferences open the invitation immediately on activation and disable ambient animation, parallax, guided scrolling, and reveal delays. Without JavaScript, a readable invitation with names, date, venue, directions, tap-to-call contacts and calendar download remains available.
 
 Until a guest opens the cover, the underlying invitation is inert, hidden from assistive technology, and cannot scroll. Opening is available with a tap, click, Enter, or Space; focus moves to the wedding heading afterward. Every page load begins sealed, including direct links to sections, which reveal their destination after opening.

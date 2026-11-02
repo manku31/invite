@@ -47,7 +47,7 @@ test("invitation loads with metadata and no client errors", async ({
   await page.goto("/");
   await openInvitation(page);
   await expect(page).toHaveTitle(
-    `${config.couple.bride} & ${config.couple.groom} — Wedding Invitation`,
+    `${config.couple.groom} & ${config.couple.bride} — Wedding Invitation`,
   );
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     config.couple.bride,
@@ -85,6 +85,20 @@ for (const width of [360, 375, 390, 412, 430, 768, 1440]) {
       // Bring each section into view so lazy-loaded images are decoded.
       for (const id of ["couple", "story", "events", "venue", "gallery"]) {
         await page.locator(`#${id}`).scrollIntoViewIfNeeded();
+        for (const image of await page.locator(`#${id} img`).all()) {
+          await image.scrollIntoViewIfNeeded();
+          await expect
+            .poll(() =>
+              image.evaluate(
+                (element: HTMLImageElement) =>
+                  element.complete && element.naturalWidth > 0,
+              ),
+            )
+            .toBe(true);
+        }
+        await page
+          .locator(`#${id}`)
+          .screenshot({ path: `test-results/mobile-${id}.png` });
       }
       await page.screenshot({
         path: "test-results/mobile-full.png",
@@ -111,7 +125,7 @@ test("mobile menu supports navigation, Escape, and focus restoration", async ({
   await trigger.click();
   await page
     .getByRole("navigation", { name: "Mobile navigation" })
-    .getByRole("link", { name: "Our story" })
+    .getByRole("link", { name: "Our Story" })
     .click();
   await expect(page).toHaveURL(/#story$/);
   await expect(page.getByRole("dialog")).toHaveCount(0);
@@ -130,11 +144,13 @@ test("gallery supports arrows, wrapping, focus containment and Escape", async ({
   const dialog = page.getByRole("dialog", { name: "Gallery", exact: true });
   await expect(dialog).toBeVisible();
   await page.keyboard.press("ArrowLeft");
-  await expect(dialog.getByText("4 / 4")).toBeVisible();
+  await expect(
+    dialog.getByText(`${config.gallery.length} / ${config.gallery.length}`),
+  ).toBeVisible();
   await page.getByRole("button", { name: "Next image" }).click();
-  await expect(dialog.getByText("1 / 4")).toBeVisible();
+  await expect(dialog.getByText(`1 / ${config.gallery.length}`)).toBeVisible();
   await page.keyboard.press("ArrowRight");
-  await expect(dialog.getByText("2 / 4")).toBeVisible();
+  await expect(dialog.getByText(`2 / ${config.gallery.length}`)).toBeVisible();
   for (let i = 0; i < 5; i++) await page.keyboard.press("Tab");
   expect(
     await page.evaluate(() => !!document.activeElement?.closest("dialog")),
@@ -184,8 +200,8 @@ test("calendar and social images are valid downloadable responses", async ({
   expect(calendar.status()).toBe(200);
   expect(calendar.headers()["content-type"]).toContain("text/calendar");
   const content = await calendar.text();
-  expect(content).toContain("DTSTART:20261212T113000Z");
-  expect(content).toContain("DTEND:20261212T183000Z");
+  expect(content).toContain("DTSTART;VALUE=DATE:20261126");
+  expect(content).toContain("DTEND;VALUE=DATE:20261127");
   expect(content).toContain("BEGIN:VEVENT");
   const image = await request.get("/opengraph-image");
   expect(image.status()).toBe(200);
@@ -209,4 +225,93 @@ test("automated accessibility checks pass on the main page", async ({
       nodes: item.nodes.map((node) => node.target),
     })),
   ).toEqual([]);
+});
+
+test("wedding details, event locations and phone links match the final invitation", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await openInvitation(page);
+  await expect(page.locator(".hero-names")).toHaveText(
+    /Vipul\s*Sharma\s*&\s*Priya\s*Sharma/,
+  );
+  await expect(page.locator(".hero-weekday")).toHaveText("Thursday");
+  await expect(page.locator(".family-section")).toContainText(
+    "S/o Shri Kaluram Narayanlalji Sharma",
+  );
+  await expect(page.locator(".family-section")).toContainText(
+    "& Smt. Vimla Kaluram Sharma",
+  );
+  await expect(page.locator(".family-section")).toContainText(
+    "D/o Shri Ramlalji Nenmalji Sharma",
+  );
+  await expect(page.locator(".family-section")).toContainText(
+    "& Smt. Chanda Ramlalji Sharma",
+  );
+  await expect(page.locator(".event-stationery h3")).toHaveText([
+    "Mayra",
+    "Haldi",
+    "Bandoli",
+    "Wedding",
+  ]);
+  await expect(page.locator(".event-stationery").nth(0)).toContainText(
+    "11:00 AM onwards",
+  );
+  await expect(page.locator(".event-stationery").nth(1)).toContainText(
+    "5:00 PM onwards",
+  );
+  await expect(page.locator(".event-stationery").nth(2)).toContainText(
+    "9:00 PM onwards",
+  );
+  await expect(page.locator(".event-stationery").nth(3)).toContainText(
+    "Morning — Baraat from Pawa",
+  );
+  await expect(page.locator(".event-stationery").nth(3)).toContainText(
+    "Desuri, Pali, Rajasthan",
+  );
+  await expect(
+    page.getByRole("link", { name: "Open Wedding Location in Google Maps" }),
+  ).toHaveAttribute(
+    "href",
+    "https://maps.app.goo.gl/7ArPgKcF4HhBkJ3M7?utm_source=chatgpt.com",
+  );
+  await expect(
+    page.getByRole("link", { name: "Call +91 99698 10685" }),
+  ).toHaveAttribute("href", "tel:+919969810685");
+  await expect(
+    page.getByRole("link", { name: "Call +91 90016 50630" }),
+  ).toHaveAttribute("href", "tel:+919001650630");
+  await expect(page.locator("main")).not.toContainText(
+    /Aarya|Deepal|Mehta|Leela|Udaipur|Reception|Sangeet/,
+  );
+});
+
+test("live countdown reaches the wedding day at midnight in India and stays at zero", async ({
+  page,
+}) => {
+  await page.clock.install({ time: new Date("2026-11-25T18:29:58Z") });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await openInvitation(page);
+  await page.clock.pauseAt(new Date("2026-11-25T18:29:59Z"));
+  await expect(page.locator(".countdown-number").last()).toHaveText("01");
+  // The one-second interval may begin between wall-clock second boundaries.
+  await page.clock.runFor(2000);
+  await expect(page.locator(".countdown-number")).toHaveText([
+    "00",
+    "00",
+    "00",
+    "00",
+  ]);
+  await expect(page.locator(".countdown-section h2")).toHaveText(
+    "Our forever has begun",
+  );
+  await page.clock.runFor(5000);
+  await expect(page.locator(".countdown-number")).toHaveText([
+    "00",
+    "00",
+    "00",
+    "00",
+  ]);
 });

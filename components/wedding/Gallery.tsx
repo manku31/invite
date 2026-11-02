@@ -32,7 +32,7 @@ export default function Gallery() {
                     src={photo.src}
                     alt={photo.alt}
                     fill
-                    sizes="(max-width: 600px) 45vw, (max-width: 1000px) 42vw, 25vw"
+                    sizes="(max-width: 600px) 90vw, (max-width: 1000px) 42vw, 33vw"
                   />
                   <span className="gallery-expand" aria-hidden="true">
                     <MoveUpRight size={20} />

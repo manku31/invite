@@ -12,11 +12,25 @@ export default function MusicToggle() {
     const audio = new Audio(config.music.src);
     audio.preload = "none";
     audio.loop = true;
-    audio.volume = Math.max(0, Math.min(1, config.music.volume));
+    audio.volume = 0;
     audioRef.current = audio;
-    const onPlay = () => setPlaying(true);
-    const onPause = () => setPlaying(false);
+    const targetVolume = Math.max(0, Math.min(1, config.music.volume));
+    let fade: ReturnType<typeof setInterval> | undefined;
+    const onPlay = () => {
+      setPlaying(true);
+      clearInterval(fade);
+      audio.volume = 0;
+      fade = setInterval(() => {
+        audio.volume = Math.min(targetVolume, audio.volume + 0.01);
+        if (audio.volume >= targetVolume) clearInterval(fade);
+      }, 90);
+    };
+    const onPause = () => {
+      setPlaying(false);
+      clearInterval(fade);
+    };
     const onError = () => {
+      clearInterval(fade);
       setPlaying(false);
       setLoading(false);
       setError("The music couldn’t load. Tap to try again.");
@@ -30,6 +44,7 @@ export default function MusicToggle() {
     document.addEventListener("visibilitychange", onVisibility);
     return () => {
       audio.pause();
+      clearInterval(fade);
       audio.removeEventListener("play", onPlay);
       audio.removeEventListener("pause", onPause);
       audio.removeEventListener("error", onError);
@@ -84,9 +99,7 @@ export default function MusicToggle() {
         ) : (
           <Music2 size={16} />
         )}
-        <span>
-          {loading ? "Loading…" : playing ? "Music is on" : config.music.label}
-        </span>
+        <span>{loading ? "Loading…" : `♪ ${config.music.label}`}</span>
       </button>
       {error && (
         <p role="status" className="music-error">

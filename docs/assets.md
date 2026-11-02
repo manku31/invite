@@ -1,5 +1,29 @@
 # Original assets
 
+## Vipul & Priya artwork update
+
+Generated with the built-in Imagegen tool. Each image is an original illustration, not a photograph or an exact depiction of the couple, family or venue. Final assets are optimized 960 × 960 WebP files.
+
+### public/images/mahadev.webp
+
+Use case: illustration-story. Asset type: square fine-art illustration for a luxury Rajasthani wedding invitation. Hand-painted Rajasthani miniature art with refined gouache, delicate ink lines, parchment paper texture, warm ivory, soft blush, antique champagne gold, deep maroon and muted earthy sage. Quiet, elegant, spiritual atmosphere. No text, letters, watermark, logo or UI. A reverent Mahadev-inspired still life: a small Shiva lingam with fresh white flowers, a brass trishul and damru, crescent moon above a distant temple nestled in the Rajasthan Aravalli hills. Fine floral borders, dawn light, beautiful balanced composition. No human figures.
+
+### public/images/peacock.webp
+
+Use case: illustration-story. Asset type: square fine-art illustration for a luxury Rajasthani wedding invitation. Hand-painted Rajasthani miniature art with refined gouache, delicate ink lines, parchment paper texture, warm ivory, soft blush, antique champagne gold, deep maroon and muted earthy sage. Quiet, elegant, spiritual atmosphere. No text, letters, watermark, logo or UI. An elegant Indian peacock beside a carved blush sandstone jharokha in a Rajasthani haveli courtyard. A delicate bansuri flute rests with lotus blossoms on an ivory cloth nearby, evoking Shri Krishna. Flowing iridescent muted teal and champagne feathers, fine ornamental details, romantic soft light.
+
+### public/images/haldi.webp
+
+Use case: illustration-story. Asset type: square fine-art illustration for a luxury Rajasthani wedding invitation. Hand-painted Rajasthani miniature art with refined gouache, delicate ink lines, parchment paper texture, warm ivory, soft blush, antique champagne gold, deep maroon and muted earthy sage. Quiet, elegant, spiritual atmosphere. No text, letters, watermark, logo or UI. An intimate wedding ritual still life in a Rajasthani courtyard: antique brass bowl of golden haldi, marigold petals, small brass diya, rose blossoms and ivory cloth with fine gold embroidery. Delicate carved palace arch softly visible behind, graceful floral details, warm afternoon sunshine.
+
+### public/images/celebration.webp
+
+Use case: illustration-story. Asset type: square fine-art illustration for a luxury Rajasthani wedding invitation. Hand-painted Rajasthani miniature art with refined gouache, delicate ink lines, parchment paper texture, warm ivory, soft blush, antique champagne gold, deep maroon and muted earthy sage. Quiet, elegant, spiritual atmosphere. No text, letters, watermark, logo or UI. A joyful traditional Rajasthani wedding scene: an ivory and blush floral mandap in a carved sandstone haveli courtyard, elders and families in traditional saris and turbans welcoming a small baraat procession with a groom in ivory sherwani on a decorated white horse. People rendered as small delicate miniature-art figures, not portraits of identifiable real people. Fine palace details, elegant marigold and jasmine garlands, soft golden light.
+
+The active music is `public/audio/rajasthani-blessings.wav`: an original 40-second synthesized shehnai-inspired reed melody over a soft tonic/fifth drone. No third-party melody or recording is used. Its reproducible source is `scripts/generate-music.mjs`. The legacy chime loop is retained but no longer used.
+
+Noto Serif Devanagari is self-hosted from its Fontsource package for the opening and hero blessings. Ganesh, trishul and peacock-feather ornaments are repo-native SVG line art.
+
 The artwork was created with the built-in image generation tool using the supplied reference for visual style. The source video and image are retained in `video/` as user-provided references and are not shipped as website backgrounds. The source studio's logo and watermarks are not reproduced.
 
 - `public/illustrations/palace.webp`: original central-arch palace illustration, 1536 × 1024, optimized to WebP.

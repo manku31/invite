@@ -15,7 +15,7 @@ test("section navigation moves keyboard focus and restores browser history", asy
   await open(page);
   await page
     .getByRole("navigation", { name: "Main navigation" })
-    .getByRole("link", { name: "Our story" })
+    .getByRole("link", { name: "Our Story" })
     .click();
   await expect(page.locator("#story h2")).toBeFocused();
   await page.goBack();
@@ -35,7 +35,7 @@ test("mobile navigation focuses the destination after closing the dialog", async
   await page.getByRole("button", { name: "Open navigation" }).click();
   await page
     .getByRole("navigation", { name: "Mobile navigation" })
-    .getByRole("link", { name: "The venue" })
+    .getByRole("link", { name: "Venue" })
     .click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(page.locator("#venue h2")).toBeFocused();
@@ -159,7 +159,7 @@ test.describe("without JavaScript", () => {
   }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      `${config.couple.bride} & ${config.couple.groom}`,
+      `${config.couple.groom} & ${config.couple.bride}`,
     );
     await expect(
       page.getByRole("link", { name: "View on Google Maps" }),
@@ -226,7 +226,7 @@ test.describe("touch gestures", () => {
       box.x + box.width * 0.15,
       box.y + box.height / 2,
     );
-    await expect(page.getByText("2 / 4")).toBeVisible();
+    await expect(page.getByText(`2 / ${config.gallery.length}`)).toBeVisible();
     await page.screenshot({ path: "test-results/touch-gallery-mobile.png" });
     await page.getByRole("button", { name: "Close gallery" }).tap();
     await expect(page.getByRole("dialog")).toHaveCount(0);

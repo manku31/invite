@@ -4,7 +4,7 @@ import Image from "next/image";
 import { m } from "motion/react";
 import { weddingConfig as config } from "@/config/wedding";
 import { formatDate } from "@/lib/utils";
-import { Lotus } from "@/components/ui/Ornaments";
+import { Ganesh } from "@/components/ui/Ornaments";
 
 const paperEase = [0.32, 0.04, 0.2, 1] as const;
 
@@ -52,7 +52,7 @@ export default function InvitationCover({
           aria-describedby="cover-instruction"
         >
           <span className="sr-only">
-            {config.couple.bride} and {config.couple.groom} invite you to their
+            {config.couple.groom} and {config.couple.bride} invite you to their
             wedding.
           </span>
           <m.span
@@ -100,7 +100,10 @@ export default function InvitationCover({
             transition={{ duration: 0.6, ease: "easeOut" }}
             aria-hidden="true"
           >
-            <span className="cover-eyebrow">{config.opening.eyebrow}</span>
+            <Ganesh className="cover-ganesh" />
+            <span className="cover-eyebrow" lang="hi">
+              {config.opening.eyebrow}
+            </span>
             <span className="cover-title">{config.opening.title}</span>
             <span className="cover-tiny-ornament">— ✧ —</span>
           </m.span>
@@ -120,11 +123,11 @@ export default function InvitationCover({
             <span className="seal-ribbon seal-ribbon-bottom" />
             <span className="wax-seal">
               <span className="wax-seal-ring">
-                <Lotus className="seal-lotus" />
+                <Ganesh className="seal-lotus" />
                 <span className="seal-monogram">
-                  {config.couple.bride[0]}
-                  <i>&</i>
                   {config.couple.groom[0]}
+                  <i>♥</i>
+                  {config.couple.bride[0]}
                 </span>
                 <span className="seal-small-star">✧</span>
               </span>
@@ -144,7 +147,7 @@ export default function InvitationCover({
               <i />
               {formatDate(config.weddingDate, { year: "numeric" })}
             </span>
-            <span className="cover-city">{config.venue.city}</span>
+            <span className="cover-city">{config.homeLocation}</span>
           </m.span>
           <m.span
             id="cover-instruction"

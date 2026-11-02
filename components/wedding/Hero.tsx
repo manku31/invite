@@ -7,7 +7,7 @@ import { ArrowDown } from "lucide-react";
 import { weddingConfig as config } from "@/config/wedding";
 import { formatDate } from "@/lib/utils";
 import { AnimatedText } from "@/components/ui/RevealOnScroll";
-import { Lotus } from "@/components/ui/Ornaments";
+import { Ganesh } from "@/components/ui/Ornaments";
 import PetalAnimation from "./PetalAnimation";
 import { useInvitationExperience } from "./InvitationExperience";
 
@@ -55,7 +55,7 @@ export default function Hero() {
       <PetalAnimation />
       <div className="hero-content">
         <AnimatedText active={revealed} delay={0.3} className="hero-blessing">
-          <Lotus />
+          <Ganesh />
           <p lang="hi">{config.hero.blessing}</p>
         </AnimatedText>
         <AnimatedText active={revealed} delay={0.65}>
@@ -72,7 +72,10 @@ export default function Hero() {
           style={{ "--name-scale": nameScale } as CSSProperties}
         >
           <AnimatedText active={revealed} delay={1.1}>
-            <span>{config.couple.bride}</span>
+            <span>
+              {config.couple.groom}
+              <small>Sharma</small>
+            </span>
           </AnimatedText>
           <AnimatedText
             active={revealed}
@@ -82,7 +85,10 @@ export default function Hero() {
             <span>&</span>
           </AnimatedText>
           <AnimatedText active={revealed} delay={1.7}>
-            <span>{config.couple.groom}</span>
+            <span>
+              {config.couple.bride}
+              <small>Sharma</small>
+            </span>
           </AnimatedText>
           <span className="sr-only"> — Wedding invitation</span>
         </h1>
@@ -94,7 +100,11 @@ export default function Hero() {
           <span>{formatDate(config.weddingDate, { year: "numeric" })}</span>
         </AnimatedText>
         <AnimatedText active={revealed} delay={2.2}>
-          <p className="hero-location">{config.venue.city}</p>
+          <p className="hero-weekday">
+            {formatDate(config.weddingDate, { weekday: "long" })}
+          </p>
+          <p className="hero-location">{config.homeLocation}</p>
+          <p className="hero-tagline">{config.couple.introduction}</p>
         </AnimatedText>
       </div>
       <AnimatedText active={revealed} delay={2.55} className="hero-scroll">

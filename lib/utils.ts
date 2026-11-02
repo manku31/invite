@@ -34,7 +34,7 @@ export function timeZoneLabel(date: string) {
   );
 }
 
-export const coupleNames = `${weddingConfig.couple.bride} & ${weddingConfig.couple.groom}`;
+export const coupleNames = `${weddingConfig.couple.groom} & ${weddingConfig.couple.bride}`;
 
 export function getCountdown(target: string, now: number) {
   const remaining = Math.max(0, new Date(target).getTime() - now);

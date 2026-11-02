@@ -2,7 +2,8 @@
 import { useRef } from "react";
 import { m, useScroll, useSpring, useTransform } from "motion/react";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
-import { Bird } from "./NatureAtmosphere";
+import { PeacockFeather } from "@/components/ui/Ornaments";
+import { weddingConfig } from "@/config/wedding";
 
 export default function SceneBridge({
   label,
@@ -42,10 +43,10 @@ export default function SceneBridge({
         className="bridge-birds"
         style={{ x: reduced ? 0 : drift, y: reduced ? 0 : rise }}
       >
-        <Bird />
-        <Bird />
+        <PeacockFeather />
       </m.div>
       <p>{label}</p>
+      <span className="bridge-monogram">{weddingConfig.monogram}</span>
       <span className="bridge-thread" />
     </div>
   );

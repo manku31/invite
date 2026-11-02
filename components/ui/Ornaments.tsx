@@ -1,4 +1,61 @@
 import type { ReactNode } from "react";
+import { weddingConfig } from "@/config/wedding";
+
+export function Ganesh({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 80 80"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M31 22 40 9l9 13M29 25c4-7 18-7 22 0M30 30C10 14 8 51 28 50M50 30c20-16 22 21 2 20M29 31c-6 11 0 20 8 24M51 31c5 10 0 16-9 19-8 3-6 14 1 14 7 0 11-7 6-11M25 58c-17 0-13 13-2 13h34c11 0 15-13-2-13M38 30h4M40 28v8" />
+      <path d="m29 42 5 2m12-2-4 2M19 57l-5-4m47 4 5-4" />
+      <circle cx="40" cy="20" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function Trishul({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 64 64"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M32 57V7m-4 6 4-7 4 7M18 12v9c0 17 28 17 28 0v-9m-5 6 5-7 5 7M13 18l5-7 5 7M23 37l18 11V37L23 48Z" />
+      <path d="M47 3a8 8 0 1 0 10 10A9 9 0 0 1 47 3Z" />
+    </svg>
+  );
+}
+
+export function PeacockFeather({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 64 64"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M17 59C26 41 36 32 43 19M25 44C-1 16 25 1 42 5c18 5 20 38-17 39Z" />
+      <path d="M29 36C13 24 24 9 38 12c15 3 13 22-9 24ZM19 48l9-1M23 41l-6-9M31 30l-6-9M31 39l12-3" />
+      <ellipse cx="35" cy="24" rx="5" ry="7" transform="rotate(30 35 24)" />
+      <path d="m34 51 22-8m-19 7 1 3m3-5 1 3m3-5 1 3" />
+    </svg>
+  );
+}
 
 export function Lotus({ className = "" }: { className?: string }) {
   return (
@@ -23,7 +80,7 @@ export function DecorativeDivider({ className = "" }: { className?: string }) {
   return (
     <div className={`decorative-divider ${className}`} aria-hidden="true">
       <span />
-      <Lotus />
+      <span className="divider-monogram">{weddingConfig.monogram}</span>
       <span />
     </div>
   );

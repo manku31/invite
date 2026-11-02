@@ -7,7 +7,7 @@ import {
   Sun,
 } from "lucide-react";
 import { weddingConfig as config, type WeddingEvent } from "@/config/wedding";
-import { eventTime, formatDate, timeZoneLabel } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { SectionHeading } from "@/components/ui/Ornaments";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
@@ -44,17 +44,17 @@ export function EventCard({
             <time dateTime={event.date}>
               {formatDate(event.date, { month: "long", year: "numeric" })}
             </time>
-            <span>
-              {eventTime(event.date)} · {timeZoneLabel(event.date)}
-            </span>
+            <span>{event.timeLabel}</span>
           </div>
         </div>
         <p className="event-venue">{event.venue}</p>
-        <p className="event-description">{event.description}</p>
-        <p className="event-dress">
-          <span>A little dress inspiration</span>
-          {event.dressCode}
-        </p>
+        <p className="event-location">{event.location}</p>
+        {event.description && (
+          <p className="event-description">{event.description}</p>
+        )}
+        {event.id === "wedding" && (
+          <p className="event-couple">{config.identity}</p>
+        )}
         <a
           href={event.mapUrl}
           target="_blank"

@@ -8,14 +8,14 @@ import Modal from "@/components/ui/Modal";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const initials = `${config.couple.bride[0]} & ${config.couple.groom[0]}`;
+  const initials = config.monogram;
   return (
     <>
       <header className="site-header">
         <a
           className="brand"
           href="#home"
-          aria-label={`${config.couple.bride} and ${config.couple.groom}, home`}
+          aria-label={`${config.couple.groom} and ${config.couple.bride}, home`}
         >
           <span className="brand-monogram">{initials}</span>
           <span className="brand-caption">{config.brand.caption}</span>
@@ -46,10 +46,7 @@ export default function Header() {
             <Lotus className="menu-lotus" />
             <p className="eyebrow">{initials} · Our wedding</p>
             <nav aria-label="Mobile navigation">
-              {[
-                { label: "The invitation", href: "#home" },
-                ...config.navigation,
-              ].map((item, index) => (
+              {config.navigation.map((item, index) => (
                 <a
                   key={item.href}
                   href={item.href}

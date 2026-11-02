@@ -8,6 +8,7 @@ import Events from "@/components/wedding/Events";
 import Countdown from "@/components/wedding/Countdown";
 import Venue from "@/components/wedding/Venue";
 import Gallery from "@/components/wedding/Gallery";
+import Contact from "@/components/wedding/Contact";
 import Closing from "@/components/wedding/Closing";
 import MusicToggle from "@/components/wedding/MusicToggle";
 import InvitationExperience from "@/components/wedding/InvitationExperience";
@@ -38,6 +39,7 @@ export default function Home() {
           <Events />
           <Countdown />
           <Venue />
+          <Contact />
           <Gallery />
           <Closing />
         </main>

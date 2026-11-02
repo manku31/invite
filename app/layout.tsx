@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { weddingConfig as config } from "@/config/wedding";
-import { coupleNames, longDate, eventTime, timeZoneLabel } from "@/lib/utils";
+import { coupleNames, longDate } from "@/lib/utils";
 import { siteUrl, publishedUrl, indexable } from "@/lib/site-url";
 import "./globals.css";
 
@@ -34,6 +34,13 @@ const script = localFont({
 const sans = localFont({
   src: "../node_modules/@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2",
   variable: "--font-sans",
+  display: "swap",
+});
+const devanagari = localFont({
+  src: "../node_modules/@fontsource/noto-serif-devanagari/files/noto-serif-devanagari-devanagari-400-normal.woff2",
+  weight: "400",
+  style: "normal",
+  variable: "--font-devanagari",
   display: "swap",
 });
 
@@ -81,7 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${serif.variable} ${script.variable} ${sans.variable}`}
+      className={`${serif.variable} ${script.variable} ${sans.variable} ${devanagari.variable}`}
     >
       <body>
         {children}
@@ -94,17 +101,18 @@ export default function RootLayout({
               <p>{config.couple.introduction}</p>
               <p>
                 <strong>{longDate(config.weddingDate)}</strong>
-                <br />
-                {eventTime(config.weddingDate)} ·{" "}
-                {timeZoneLabel(config.weddingDate)}
               </p>
               <p>
                 {config.venue.name}
                 <br />
                 {config.venue.address}
-                <br />
-                {config.venue.city}
               </p>
+              <p>{config.venue.arrivalNote}</p>
+              {config.contact.numbers.map((number) => (
+                <a className="text-link" key={number.href} href={number.href}>
+                  {number.display}
+                </a>
+              ))}
               <a className="button" href={config.venue.mapUrl}>
                 View on Google Maps
               </a>

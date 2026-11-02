@@ -32,6 +32,12 @@ export default function Countdown() {
             ? config.sections.countdown.complete
             : config.sections.countdown.title}
         </h2>
+        <p className="countdown-identity">{config.identity}</p>
+        <p className="countdown-note">
+          {time?.complete
+            ? config.couple.introduction
+            : config.sections.countdown.description}
+        </p>
         <div
           className="countdown"
           role="timer"

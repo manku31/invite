@@ -45,7 +45,7 @@ export default async function Image() {
           Invite you to celebrate a beautiful beginning
         </div>
         <div style={{ fontSize: 30, marginTop: 40 }}>
-          {`${longDate(config.weddingDate)} · ${config.venue.city}`}
+          {`${longDate(config.weddingDate)} · ${config.homeLocation}`}
         </div>
       </div>
     </div>,

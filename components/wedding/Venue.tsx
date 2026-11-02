@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight, CalendarDays, MapPin } from "lucide-react";
 import { weddingConfig as config } from "@/config/wedding";
-import { eventTime, longDate, timeZoneLabel } from "@/lib/utils";
+import { longDate } from "@/lib/utils";
 import { SectionHeading } from "@/components/ui/Ornaments";
 import { ImageReveal, RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { ButtonLink } from "@/components/ui/Button";
@@ -21,21 +21,14 @@ export default function Venue() {
               <MapPin size={19} strokeWidth={1.3} />
               <div>
                 <h3>{config.venue.name}</h3>
-                <address>
-                  {config.venue.address}
-                  <br />
-                  {config.venue.city} {config.venue.postalCode}
-                </address>
+                <address>{config.venue.address}</address>
               </div>
             </div>
             <div>
               <CalendarDays size={19} strokeWidth={1.3} />
               <div>
                 <p>{longDate(config.weddingDate)}</p>
-                <p>
-                  {eventTime(config.weddingDate)} onwards ·{" "}
-                  {timeZoneLabel(config.weddingDate)}
-                </p>
+                <p>Wedding Ceremony · {config.venue.ceremonyLocation}</p>
               </div>
             </div>
           </div>
@@ -43,8 +36,9 @@ export default function Venue() {
             href={config.venue.mapUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Open Wedding Location in Google Maps"
           >
-            View on Google Maps <ArrowUpRight size={16} />
+            View Location <ArrowUpRight size={16} />
           </ButtonLink>
           <p className="venue-arrival">{config.venue.arrivalNote}</p>
         </RevealOnScroll>

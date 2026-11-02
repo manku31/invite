@@ -2,6 +2,7 @@ import Image from "next/image";
 import { weddingConfig as config } from "@/config/wedding";
 import { DecorativeDivider } from "@/components/ui/Ornaments";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { longDate } from "@/lib/utils";
 export default function Closing() {
   return (
     <>
@@ -20,16 +21,16 @@ export default function Closing() {
           <p className="closing-note">{config.closing.note}</p>
           <p className="eyebrow closing-signoff">{config.closing.signOff}</p>
           <p className="closing-names">
-            {config.couple.bride} <span>&</span> {config.couple.groom}
+            {config.couple.groom} <span>&</span> {config.couple.bride}
           </p>
-          <p className="closing-hashtag">{config.closing.hashtag}</p>
+          <p className="closing-date">{longDate(config.weddingDate)}</p>
+          <p className="closing-address">{config.homeAddress}</p>
+          <p className="closing-welcome">{config.family.welcome}</p>
         </RevealOnScroll>
       </section>
       <footer className="site-footer">
         <span>{config.closing.footer}</span>
-        <a href="#home">
-          {config.couple.bride[0]} & {config.couple.groom[0]}
-        </a>
+        <a href="#home">{config.monogram}</a>
         {config.socialLinks.map((link) => (
           <a
             key={link.url}
@@ -41,7 +42,7 @@ export default function Closing() {
           </a>
         ))}
         <span>
-          {new Date(config.weddingDate).getFullYear()} · {config.venue.city}
+          {new Date(config.weddingDate).getFullYear()} · {config.homeLocation}
         </span>
       </footer>
     </>

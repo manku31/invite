@@ -31,7 +31,7 @@ export default function Couple() {
           <p className="body-copy">{config.couple.note}</p>
           <DecorativeDivider />
           <p className="couple-signature">
-            {config.couple.bride} <span>&</span> {config.couple.groom}
+            {config.couple.groom} <span>♥</span> {config.couple.bride}
           </p>
         </RevealOnScroll>
       </div>

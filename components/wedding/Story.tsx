@@ -1,13 +1,18 @@
-import { Coffee, Flower2, Heart, Sparkles } from "lucide-react";
+import { Heart, UsersRound } from "lucide-react";
 import { weddingConfig as config } from "@/config/wedding";
-import { DecorativeDivider, SectionHeading } from "@/components/ui/Ornaments";
+import {
+  DecorativeDivider,
+  PeacockFeather,
+  Trishul,
+  SectionHeading,
+} from "@/components/ui/Ornaments";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 const icons = {
-  flower: Flower2,
-  coffee: Coffee,
-  heart: Heart,
-  sparkles: Sparkles,
+  mahadev: Trishul,
+  krishna: PeacockFeather,
+  family: UsersRound,
+  wedding: Heart,
 };
 export default function Story() {
   return (
@@ -23,10 +28,11 @@ export default function Story() {
               <li key={item.year}>
                 <RevealOnScroll delay={index * 0.06} className="story-item">
                   <span className="story-marker">
-                    <Icon size={19} strokeWidth={1.1} />
+                    <Icon className="story-symbol" />
                   </span>
                   <span className="story-year">{item.year}</span>
                   <div className="story-description">
+                    <span className="story-motif-label">{item.motifLabel}</span>
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                   </div>
@@ -35,6 +41,10 @@ export default function Story() {
             );
           })}
         </ol>
+        <RevealOnScroll className="story-signoff">
+          <p className="couple-signature">{config.identity}</p>
+          <p>{config.storySignOff}</p>
+        </RevealOnScroll>
         <DecorativeDivider />
       </div>
     </section>

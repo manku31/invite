@@ -156,7 +156,7 @@ test("a section link opens the invitation before showing its destination", async
   await page.getByRole("button", { name: config.opening.buttonLabel }).click();
   await expect(page.locator("#venue")).toBeInViewport();
   await expect(
-    page.getByRole("link", { name: "View on Google Maps" }),
+    page.getByRole("link", { name: "Open Wedding Location in Google Maps" }),
   ).toBeVisible();
 });
 
@@ -179,12 +179,12 @@ test("nature is decorative, and smooth anchors connect the sections", async ({
     "pointer-events",
     "none",
   );
-  await expect(page.locator(".garden-butterfly")).toHaveCount(2);
-  await expect(page.locator(".garden-birds")).toHaveCount(1);
+  await expect(page.locator(".garden-butterfly")).toHaveCount(0);
+  await expect(page.locator(".garden-birds")).toHaveCount(0);
   await expect(page.locator(".wind-leaf")).toHaveCount(6);
   await page
     .getByRole("navigation", { name: "Main navigation" })
-    .getByRole("link", { name: "Our story" })
+    .getByRole("link", { name: "Our Story" })
     .click();
   await expect(page).toHaveURL(/#story$/);
   await expect
