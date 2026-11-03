@@ -42,28 +42,6 @@ test("mobile navigation focuses the destination after closing the dialog", async
   await expect(page.locator("#venue")).toBeInViewport();
 });
 
-test("guests can pause and resume all decorative motion", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("button", { name: config.opening.buttonLabel }).click();
-  await expect(page.locator(".invitation-experience")).toHaveAttribute(
-    "data-phase",
-    "open",
-    { timeout: 6000 },
-  );
-  await page.getByRole("button", { name: "Pause motion", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Resume motion" }),
-  ).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator(".nature-atmosphere")).toHaveCount(0);
-  await expect(page.locator(".petals")).toHaveCount(0);
-  await expect(page.locator(".hero-light")).toHaveCSS("animation-name", "none");
-  await page.getByRole("button", { name: "Resume motion" }).click();
-  await expect(page.locator(".nature-atmosphere")).toHaveCount(1);
-  await expect(
-    page.getByRole("button", { name: "Pause motion", exact: true }),
-  ).toHaveAttribute("aria-pressed", "false");
-});
-
 test("missing pages have a working route back to the invitation", async ({
   page,
 }) => {

@@ -42,11 +42,6 @@ export const weddingConfig = {
     guidedScroll: { enabled: true, pauseMs: 3700, durationSeconds: 7 },
   },
   experience: {
-    motionLabels: {
-      pause: "Pause motion",
-      resume: "Resume motion",
-      reduced: "Motion reduced",
-    },
     smoothWheel: true,
     nature: {
       enabled: true,
@@ -239,8 +234,8 @@ export const weddingConfig = {
       shape: "tall",
     },
     {
-      src: "/images/haldi.webp",
-      alt: "Brass haldi bowl, marigolds and traditional wedding details in a Rajasthani courtyard",
+      src: "/images/vipul-priya-2.webp",
+      alt: "Vipul in a white shirt and Priya in a pink saree smiling together outside an iron gate",
       caption: "A little sunshine before forever",
       shape: "short",
     },

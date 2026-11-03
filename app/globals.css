@@ -2965,29 +2965,7 @@ body:has(.invitation-experience[data-locked="true"]) {
   }
 }
 
-/* Guest comfort: readable details, touch targets, and a quiet-motion option. */
-.motion-toggle {
-  position: fixed;
-  right: max(24px, env(safe-area-inset-right));
-  bottom: max(22px, env(safe-area-inset-bottom));
-  z-index: 45;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 10px 15px;
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  background: #faf6edf2;
-  color: var(--maroon);
-  font-size: 10px;
-  box-shadow: 0 4px 18px #493b3508;
-}
-.motion-toggle:disabled {
-  cursor: default;
-  opacity: 0.8;
-}
+/* Guest comfort: readable details and touch targets. */
 .music-control {
   bottom: max(22px, env(safe-area-inset-bottom));
 }
@@ -3078,14 +3056,9 @@ html:has([data-motion-paused="true"]) {
     left: max(14px, env(safe-area-inset-left));
     bottom: max(14px, env(safe-area-inset-bottom));
   }
-  .music-toggle,
-  .motion-toggle {
+  .music-toggle {
     font-size: 10px;
     min-height: 44px;
-  }
-  .motion-toggle {
-    bottom: max(14px, env(safe-area-inset-bottom));
-    padding: 9px 12px;
   }
   .cover-instruction {
     font-size: 10px;
@@ -3096,9 +3069,6 @@ html:has([data-motion-paused="true"]) {
 }
 
 @media (max-width: 800px) {
-  .motion-toggle {
-    right: calc(70px + env(safe-area-inset-right));
-  }
   .mobile-menu-button {
     right: max(14px, env(safe-area-inset-right));
     bottom: max(14px, env(safe-area-inset-bottom));
@@ -3446,6 +3416,13 @@ h2[tabindex="-1"]:focus {
   }
   .hero-scroll {
     bottom: 32px;
+  }
+  .family-grid {
+    align-items: stretch;
+  }
+  .family-grid > div {
+    width: 100%;
+    text-align: center;
   }
   .family-grid > div > p.family-parents {
     font-size: 20px;

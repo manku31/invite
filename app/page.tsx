@@ -13,7 +13,6 @@ import Closing from "@/components/wedding/Closing";
 import MusicToggle from "@/components/wedding/MusicToggle";
 import InvitationExperience from "@/components/wedding/InvitationExperience";
 import NatureAtmosphere from "@/components/wedding/NatureAtmosphere";
-import MotionToggle from "@/components/wedding/MotionToggle";
 import SceneBridge from "@/components/wedding/SceneBridge";
 import { weddingConfig as config } from "@/config/wedding";
 
@@ -44,7 +43,6 @@ export default function Home() {
           <Closing />
         </main>
         <MusicToggle />
-        <MotionToggle />
         <NatureAtmosphere />
       </InvitationExperience>
     </MotionProvider>
