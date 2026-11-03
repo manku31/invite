@@ -278,9 +278,11 @@ export const weddingConfig = {
   },
   music: {
     enabled: true,
-    src: "/audio/rajasthani-blessings.wav",
+    src: "/audio/alex-morgan-ceremony-wedding-invitation-music-583281.mp3",
+    /** Seconds into the track where playback starts (and restarts on loop). */
+    startAt: 90,
     label: "A Little Music",
-    title: "Rajasthani Blessings — original shehnai-inspired instrumental",
+    title: "Ceremony — wedding invitation music by Alex Morgan (Pixabay)",
     volume: 0.2,
   },
   sharing: { url: "" },

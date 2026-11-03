@@ -15,7 +15,13 @@ import InvitationCover from "./InvitationCover";
 import { useInvitationScroll } from "@/lib/use-invitation-scroll";
 
 type Phase = "closed" | "opening" | "revealing" | "open";
-const ExperienceContext = createContext({ revealed: true, opened: true });
+type MusicStarter = (() => void) | null;
+const ExperienceContext = createContext<{
+  revealed: boolean;
+  opened: boolean;
+  /** MusicToggle registers its play function so opening the gate can start music. */
+  registerMusicStart: (start: MusicStarter) => void;
+}>({ revealed: true, opened: true, registerMusicStart: () => {} });
 export const useInvitationExperience = () => useContext(ExperienceContext);
 
 export default function InvitationExperience({
@@ -30,6 +36,10 @@ export default function InvitationExperience({
   const contentRef = useRef<HTMLDivElement>(null);
   const started = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const musicStart = useRef<MusicStarter>(null);
+  const registerMusicStart = (start: MusicStarter) => {
+    musicStart.current = start;
+  };
   useInvitationScroll(opened, reduced);
 
   useEffect(() => {
@@ -46,6 +56,8 @@ export default function InvitationExperience({
   function openInvitation() {
     if (started.current) return;
     started.current = true;
+    // Must run synchronously inside the tap so mobile browsers allow audio.
+    musicStart.current?.();
     if (reduced) {
       setPhase("open");
       return;
@@ -75,7 +87,7 @@ export default function InvitationExperience({
   }, [opened]);
 
   return (
-    <ExperienceContext.Provider value={{ revealed, opened }}>
+    <ExperienceContext.Provider value={{ revealed, opened, registerMusicStart }}>
       <div
         className="invitation-experience"
         data-phase={phase}
